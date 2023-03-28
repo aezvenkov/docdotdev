@@ -1,0 +1,53 @@
+version: "0.1"
+
+x-database-config-data:
+  &postgres-connection-data
+  environment:
+    POSTGRES_DB: "main"
+    POSTGRES_USER: "user"
+    POSTGRES_PASSWORD: "password"
+
+x-pgadmin-dashboard-data:
+  &pgadmin-dashboard-data
+  environment:
+    PGADMIN_DEFAULT_EMAIL: admin@admin.com
+    PGADMIN_DEFAULT_PASSWORD: secret
+    PGADMIN_LISTEN_PORT: 80
+
+x-client-backend-data:
+  &client-backend-data
+  environment:
+    server.port: 8080
+    spring.datasource.url: jdbc:postgresql://localhost:5432/main
+    spring.datasource.username: admin@admin.com
+    spring.datasource.password: secret
+
+services:
+  postgres:
+    container_name: postgres_db
+    image: postgres:13.3
+    restart: always
+    <<: *postgres-connection-data
+    ports:
+      - "5432:5432"
+    volumes:
+      - /var/lib/postgresql/data
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4:5.5
+    <<: *pgadmin-dashboard-data
+    ports:
+      - "5000:80"
+    volumes:
+      - /var/lib/pgadmin
+
+  client-backend:
+    container_name: docdotdev_client_backend
+    image: docdotdev_client_backend
+    build:
+      context: ./backend/client-backend
+      dockerfile: Dockerfile
+    <<: *client-backend-data
+    ports:
+      - "8081:8080"
