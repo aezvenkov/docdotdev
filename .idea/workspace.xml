@@ -5,32 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29aa2605-89a3-4ad8-b6a0-e47999b3cc68" name="Changes" comment="Docker deployment for client-backend and db setting up">
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/Constants.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/AppUserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/AppUserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/RegistrationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/model/AppUser.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/model/AppUserPermissions.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/model/AppUserRole.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/config/PasswordEncoder.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/config/WebSecurityConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/controllers/JwtTokenController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/controllers/ManagementController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/controllers/SelfManagementController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/email/EmailSender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/email/EmailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/email/EmailValidator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/jwt/JwtAuthenticationFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/jwt/JwtAuthorizationFilter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/requests/RegistrationRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/token/ConfirmationToken.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/token/ConfirmationTokenRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/token/ConfirmationTokenService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/config/ApplicationConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/controllers/AuthenticationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/requests/AuthenticationRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/requests/AuthenticationResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/token/jwt/JwtAuthenticationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/token/jwt/JwtService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/token/jwt/JwtToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/token/jwt/JwtTokenRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/token/jwt/LogoutService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/client-backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/ClientBackendApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/ClientBackendApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/RegistrationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/AuthenticationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/config/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/controllers/JwtTokenController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/controllers/ManagementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/controllers/ManagementController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/controllers/SelfManagementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/controllers/SelfManagementController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/token/confirmation/ConfirmationToken.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/token/confirmation/ConfirmationToken.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/token/confirmation/ConfirmationTokenRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/token/confirmation/ConfirmationTokenRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/token/confirmation/ConfirmationTokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/token/confirmation/ConfirmationTokenService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,27 +47,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/artem/GitHub/security-service",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
-    "ts.external.directory.path": "C:\\Users\\artem\\GitHub\\docdotdev\\frontend\\frontend-client\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/artem/GitHub/security-service&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\artem\\GitHub\\docdotdev\\frontend\\frontend-client\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\artem\GitHub\docdotdev\frontend" />
@@ -182,6 +175,8 @@
       <workItem from="1680041768816" duration="2465000" />
       <workItem from="1680355205352" duration="924000" />
       <workItem from="1680448995436" duration="683000" />
+      <workItem from="1680456797533" duration="611000" />
+      <workItem from="1680474644479" duration="7000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678664181065</created>

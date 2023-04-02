@@ -1,83 +1,58 @@
 package com.example.clientbackend.config;
 
-import com.example.clientbackend.appuser.AppUserRepository;
-import com.example.clientbackend.appuser.AppUserService;
-import com.example.clientbackend.appuser.model.AppUser;
 import com.example.clientbackend.appuser.model.AppUserRole;
-import lombok.AllArgsConstructor;
+import com.example.clientbackend.token.jwt.JwtAuthenticationFilter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 @Configuration
-@AllArgsConstructor
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+@RequiredArgsConstructor
+public class WebSecurityConfig {
 
-    private static final String API_PREFIX = "/api/v*";
+    private final JwtAuthenticationFilter jwtAuthFilter;
 
-    private final AppUserService appUserService;
+    private final AuthenticationProvider authenticationProvider;
 
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final LogoutHandler logoutHandler;
 
-    private final AppUserRepository appUserRepository;
+    private static final String API_PREFIX = "/api/v1";
 
 
     @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider provider =
-                new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(bCryptPasswordEncoder);
-        provider.setUserDetailsService(appUserService);
-        return provider;
-    }
-
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(daoAuthenticationProvider());
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers(API_PREFIX + "/registration/**", "/api/login/**", "/api/token_controller/**", "/", "index", "/css/*", "/js/*").permitAll()
-                .antMatchers(API_PREFIX + "/management/**").hasAuthority(AppUserRole.ADMIN.name())
-                .antMatchers(API_PREFIX + "/self_management/**").hasAnyAuthority(AppUserRole.ADMIN.name(), AppUserRole.USER.name())
-                .anyRequest().authenticated();
+                .csrf()
+                    .disable()
+                .authorizeHttpRequests()
+                .requestMatchers(API_PREFIX + "/auth/**")
+                    .permitAll()
+                .requestMatchers(API_PREFIX + "/management/**")
+                    .hasAuthority(AppUserRole.ADMIN.name())
+                .requestMatchers(API_PREFIX + "/self_management/**")
+                    .hasAnyAuthority(AppUserRole.ADMIN.name(), AppUserRole.USER.name())
+                .anyRequest()
+                    .authenticated()
+                .and()
+                .sessionManagement()
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authenticationProvider(authenticationProvider)
+                    .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+                .logout()
+                    .logoutUrl("/api/v1/authentication/logout")
+                .addLogoutHandler(logoutHandler)
+                    .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext());
+
+        return http.build();
     }
-
-    @Override
-    @Bean
-    protected UserDetailsService userDetailsService() {
-        AppUser adminUser = new AppUser(
-                "admin",
-                "admin",
-                "admin@admin.com",
-                bCryptPasswordEncoder.encode("secret"),
-                AppUserRole.ADMIN
-        );
-        adminUser.setEnabled(true);
-        appUserRepository.save(adminUser);
-
-        return new InMemoryUserDetailsManager(adminUser);
-    }
-
 }

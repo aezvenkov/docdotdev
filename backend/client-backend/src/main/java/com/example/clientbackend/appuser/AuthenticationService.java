@@ -4,12 +4,20 @@ import com.example.clientbackend.appuser.model.AppUser;
 import com.example.clientbackend.appuser.model.AppUserRole;
 import com.example.clientbackend.email.EmailSender;
 import com.example.clientbackend.email.EmailValidator;
+import com.example.clientbackend.requests.AuthenticationRequest;
+import com.example.clientbackend.requests.AuthenticationResponse;
 import com.example.clientbackend.requests.RegistrationRequest;
+import com.example.clientbackend.token.TokenType;
 import com.example.clientbackend.token.confirmation.ConfirmationToken;
 import com.example.clientbackend.token.confirmation.ConfirmationTokenService;
+import com.example.clientbackend.token.jwt.JwtService;
+import com.example.clientbackend.token.jwt.JwtToken;
+import com.example.clientbackend.token.jwt.JwtTokenRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
 
 import java.net.InetAddress;
@@ -21,32 +29,76 @@ import static com.example.clientbackend.Constants.TOKEN_CONFIRM_LINK_FORMAT;
 @Service
 @AllArgsConstructor
 @EnableScheduling
-public class RegistrationService {
+public class AuthenticationService {
+
     private final AppUserService appUserService;
-    private EmailValidator emailValidator;
+
     private final ConfirmationTokenService confirmationTokenService;
+
+    private final JwtService jwtService;
+
+    private EmailValidator emailValidator;
+
+    private final JwtTokenRepository jwtTokenRepositoryRepository;
+
     private final EmailSender emailSender;
 
-    public String register(RegistrationRequest request) {
+    private final AuthenticationManager authenticationManager;
+
+
+    private void saveUserJwtToken(AppUser user, String jwtToken) {
+        var token = JwtToken.builder()
+                .user(user)
+                .token(jwtToken)
+                .tokenType(TokenType.BEARER)
+                .expired(false)
+                .revoked(false)
+                .build();
+        jwtTokenRepositoryRepository.save(token);
+    }
+
+    private void revokeAllUserTokens(AppUser user) {
+        var validUserTokens = jwtTokenRepositoryRepository.findAllValidTokenByUser(user.getUid());
+        if (validUserTokens.isEmpty())
+            return;
+        validUserTokens.forEach(token -> {
+            token.setExpired(true);
+            token.setRevoked(true);
+        });
+        jwtTokenRepositoryRepository.saveAll(validUserTokens);
+    }
+
+    public AuthenticationResponse register(RegistrationRequest request) {
         boolean isValidEmail = emailValidator
                 .test(request.email());
         if (!isValidEmail) {
             throw new IllegalStateException("Email not valid!");
         }
+        var user = new AppUser(request.firstName(), request.lastName(), request.email(), request.password(), AppUserRole.USER);
 
-        String token = appUserService.signUser(
-                new AppUser(
-                        request.firstName(),
-                        request.lastName(),
+        String confirmationToken = appUserService.signUser(user);
+        //emailSender.send(request.email(), buildEmail(request.firstName(), buildConfirmLink(confirmationToken)));
+
+        var jwtToken = jwtService.generateToken(user);
+        saveUserJwtToken(user, jwtToken);
+
+        return new AuthenticationResponse(confirmationToken, jwtToken);
+    }
+
+    public AuthenticationResponse authenticate(AuthenticationRequest request) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
                         request.email(),
-                        request.password(),
-                        AppUserRole.USER
-                ));
-        emailSender.send(
-                request.email(),
-                buildEmail(request.firstName(), buildConfirmLink(token)));
+                        request.password()
+                )
+        );
 
-        return token;
+        var user = appUserService.getUserByEmail(request.email()).orElseThrow();
+        var jwtToken = jwtService.generateToken(user);
+        revokeAllUserTokens(user);
+        saveUserJwtToken(user, jwtToken);
+
+        return new AuthenticationResponse(null, jwtToken);
     }
 
     @Transactional
