@@ -11,7 +11,7 @@ Project that includes a group of applications representing a service for storing
 
 Use following command to run services locally:
 
-```shell
+```bash
 docker compose up
 ```
 

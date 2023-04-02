@@ -4,12 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="29aa2605-89a3-4ad8-b6a0-e47999b3cc68" name="Changes" comment="Plugins config">
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+    <list default="true" id="29aa2605-89a3-4ad8-b6a0-e47999b3cc68" name="Changes" comment="Docker deployment for client-backend and db setting up">
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/Constants.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/AppUserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/AppUserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/RegistrationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/model/AppUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/model/AppUserPermissions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/model/AppUserRole.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/config/PasswordEncoder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/config/WebSecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/controllers/JwtTokenController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/controllers/ManagementController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/controllers/SelfManagementController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/email/EmailSender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/email/EmailService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/email/EmailValidator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/jwt/JwtAuthenticationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/jwt/JwtAuthorizationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/requests/RegistrationRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/token/ConfirmationToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/token/ConfirmationTokenRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/token/ConfirmationTokenService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/client-backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/ClientBackendApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/ClientBackendApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,25 +54,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/artem/GitHub/docdotdev/backend/client-backend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\artem\\GitHub\\docdotdev\\frontend\\frontend-client\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/artem/GitHub/security-service",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
+    "ts.external.directory.path": "C:\\Users\\artem\\GitHub\\docdotdev\\frontend\\frontend-client\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\artem\GitHub\docdotdev\frontend" />
@@ -60,7 +83,37 @@
       <recent name="C:\Users\artem\GitHub\docdotdev\backend\client-backend" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml: Compose Deployment">
+  <component name="RunManager" selected="Docker.docker-compose.yml.postgres: Compose Deployment">
+    <configuration default="true" type="AZURE_FUNCTION_SUPPORT" factoryName="Run Functions">
+      <option name="appName" />
+      <option name="appServicePlanName" />
+      <option name="appServicePlanResourceGroup" />
+      <option name="appSettingsKey" value="2704c9b0-eef9-4aa4-a952-13b39cb9acc4" />
+      <option name="artifact" />
+      <option name="debugOptions" />
+      <option name="deployment" />
+      <option name="deploymentStagingDirectoryPath" />
+      <option name="funcPath" />
+      <option name="functionHostArguments" />
+      <option name="hostJsonPath" />
+      <option name="insightsName" />
+      <option name="instrumentationKey" />
+      <option name="javaVersion" />
+      <option name="localSettingsJsonPath" />
+      <option name="moduleName" />
+      <option name="os" />
+      <option name="pricingTier" />
+      <option name="providerMap">
+        <map />
+      </option>
+      <option name="region" />
+      <option name="resourceGroup" />
+      <option name="stagingFolder" />
+      <option name="subscription" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
       <deployment type="docker-compose.yml">
         <settings />
@@ -88,8 +141,22 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="docker-compose.yml.postgres: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="postgres" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.docker-compose.yml.postgres: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.client-backend: Compose Deployment" />
       </list>
@@ -112,7 +179,9 @@
       <workItem from="1679956676179" duration="427000" />
       <workItem from="1680017339226" duration="45000" />
       <workItem from="1680017402010" duration="3944000" />
-      <workItem from="1680041768816" duration="643000" />
+      <workItem from="1680041768816" duration="2465000" />
+      <workItem from="1680355205352" duration="924000" />
+      <workItem from="1680448995436" duration="683000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678664181065</created>
@@ -128,7 +197,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678664456221</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Docker deployment for client-backend and db setting up">
+      <created>1680043021199</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1680043021199</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -151,6 +227,7 @@
     </ignored-roots>
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Plugins config" />
-    <option name="LAST_COMMIT_MESSAGE" value="Plugins config" />
+    <MESSAGE value="Docker deployment for client-backend and db setting up" />
+    <option name="LAST_COMMIT_MESSAGE" value="Docker deployment for client-backend and db setting up" />
   </component>
 </project>
