@@ -17,8 +17,8 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 import java.net.InetAddress;
 import java.time.LocalDateTime;
@@ -86,23 +86,20 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.email(),
-                        request.password()
-                )
-        );
 
         var user = appUserService.getUserByEmail(request.email()).orElseThrow();
-        var jwtToken = jwtService.generateToken(user);
-        revokeAllUserTokens(user);
-        saveUserJwtToken(user, jwtToken);
 
-        return new AuthenticationResponse(null, jwtToken);
+        if (user.isEnabled()) {
+            var jwtToken = jwtService.generateToken(user);
+            revokeAllUserTokens(user);
+            saveUserJwtToken(user, jwtToken);
+
+            return new AuthenticationResponse(null, jwtToken);
+        } else return null;
     }
 
     @Transactional
-    public String confirmToken(String token) {
+    public Mono<String> confirmToken(String token) {
         ConfirmationToken confirmationToken = confirmationTokenService
                 .getToken(token)
                 .orElseThrow(() -> new IllegalStateException("Token not found!"));
@@ -119,7 +116,7 @@ public class AuthenticationService {
 
         confirmationTokenService.setConfirmedAt(token);
         appUserService.enableAppUser(confirmationToken.getAppUser().getEmail());
-        return "confirmed";
+        return Mono.just("confirmed");
     }
 
     private String buildConfirmLink(String token) {

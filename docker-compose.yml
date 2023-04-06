@@ -42,6 +42,21 @@ services:
     volumes:
       - /var/lib/pgadmin
 
+  zookeeper:
+    image: wurstmeister/zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: wurstmeister/kafka
+    container_name: kafka
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_ADVERTISED_HOST_NAME: localhost
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+
   client-backend:
     container_name: docdotdev_client_backend
     image: docdotdev_client_backend
@@ -51,3 +66,6 @@ services:
     <<: *client-backend-data
     ports:
       - "8081:8080"
+
+#  doc-backend:
+#

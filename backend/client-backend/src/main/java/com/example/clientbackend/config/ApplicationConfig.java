@@ -1,6 +1,5 @@
 package com.example.clientbackend.config;
 
-import com.example.clientbackend.appuser.AppUserRepository;
 import com.example.clientbackend.appuser.AppUserService;
 import com.example.clientbackend.appuser.model.AppUser;
 import com.example.clientbackend.appuser.model.AppUserRole;
@@ -14,8 +13,6 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 @RequiredArgsConstructor
@@ -25,10 +22,19 @@ public class ApplicationConfig {
 
     private final AppUserService appUserService;
 
-    private final AppUserRepository repository;
-
     @Bean
     public UserDetailsService userDetailsService() {
+        AppUser defaultAdminUser = new AppUser(
+                "admin",
+                "admin",
+                "admin@admin.com",
+                bCryptPasswordEncoder.encode("secret"),
+                AppUserRole.ADMIN
+        );
+        defaultAdminUser.setEnabled(true);
+        appUserService.signUser(defaultAdminUser);
+
+
         return username -> appUserService.getUserByEmail(username).orElseThrow(() ->
                 new UsernameNotFoundException("User not found"));
     }

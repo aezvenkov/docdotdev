@@ -6,6 +6,7 @@ import com.example.clientbackend.email.EmailValidator;
 import com.example.clientbackend.token.confirmation.ConfirmationToken;
 import com.example.clientbackend.token.confirmation.ConfirmationTokenService;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,6 +19,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
+
+import static com.example.clientbackend.Constants.USERS_COLLECTION;
 
 @Service
 @AllArgsConstructor
@@ -88,6 +91,7 @@ public class AppUserService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException(String.format(USER_NOT_FOUND_MSG, email)));
     }
 
+    @Cacheable(USERS_COLLECTION)
     public List<AppUser> getAllUsers() {
         return appUserRepository.findAll();
     }

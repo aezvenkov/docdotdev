@@ -21,4 +21,9 @@ public class Constants {
     public static final String ALGORITHM_SECRET = "secret";
     public static final String CLAIM_ROLES = "roles";
     public static final String HEADER_BEARER = "Bearer ";
+
+    /**
+     * Caching
+     */
+    public static final String USERS_COLLECTION = "usersCollection";
 }
