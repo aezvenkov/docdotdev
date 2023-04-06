@@ -5,19 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29aa2605-89a3-4ad8-b6a0-e47999b3cc68" name="Changes" comment="Docker deployment for client-backend and db setting up">
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/config/CacheConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/config/OpenApiConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/docdotdev.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/docdotdev.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/config/KafkaProducerConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/kafka/CommandType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/kafka/KafkaCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/resources/banner.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/client-backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/AppUserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/AppUserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/AppUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/AppUserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/AuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/config/ApplicationConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/config/ApplicationConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/controllers/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/controllers/AuthenticationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/controllers/ManagementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/controllers/ManagementController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/config/KafkaTopicConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/config/KafkaTopicConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +68,7 @@
       <recent name="C:\Users\artem\GitHub\docdotdev\backend\client-backend" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.Angular CLI Server">
+  <component name="RunManager" selected="Docker.docker-compose.yml.kafka: Compose Deployment">
     <configuration default="true" type="AZURE_FUNCTION_SUPPORT" factoryName="Run Functions">
       <option name="appName" />
       <option name="appServicePlanName" />
@@ -131,12 +129,38 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <configuration name="docker-compose.yml.kafka: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="kafka" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
     <configuration name="docker-compose.yml.postgres: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
           <option name="services">
             <list>
               <option value="postgres" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.zookeeper: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="zookeeper" />
             </list>
           </option>
           <option name="sourceFilePath" value="docker-compose.yml" />
@@ -156,6 +180,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.docker-compose.yml.kafka: Compose Deployment" />
+        <item itemvalue="Docker.docker-compose.yml.zookeeper: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.postgres: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.client-backend: Compose Deployment" />
@@ -184,7 +210,7 @@
       <workItem from="1680448995436" duration="683000" />
       <workItem from="1680456797533" duration="611000" />
       <workItem from="1680474644479" duration="7000" />
-      <workItem from="1680801837928" duration="1969000" />
+      <workItem from="1680801837928" duration="2670000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678664181065</created>

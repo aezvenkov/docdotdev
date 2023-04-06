@@ -14,16 +14,12 @@ public class Constants {
     public static final String SERVICE_PORT = "8081";
 
     /**
-     * JWT authentication
-     */
-    public static final String PARAM_USERNAME = "username";
-    public static final String PARAM_PASSWORD = "password";
-    public static final String ALGORITHM_SECRET = "secret";
-    public static final String CLAIM_ROLES = "roles";
-    public static final String HEADER_BEARER = "Bearer ";
-
-    /**
      * Caching
      */
     public static final String USERS_COLLECTION = "usersCollection";
+
+    /**
+     * Kafka
+     */
+    public static final String FROM_CLIENT_TO_MESSAGE_SERVICE_TOPIC = "FROM_CLIENT_TO_MESSAGE_SERVICE_TOPIC";
 }

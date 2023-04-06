@@ -2,8 +2,10 @@ package com.example.clientbackend.appuser;
 
 import com.example.clientbackend.appuser.model.AppUser;
 import com.example.clientbackend.appuser.model.AppUserRole;
-import com.example.clientbackend.email.EmailSender;
+import com.example.clientbackend.config.KafkaProducerConfig;
 import com.example.clientbackend.email.EmailValidator;
+import com.example.clientbackend.kafka.CommandType;
+import com.example.clientbackend.kafka.KafkaCommand;
 import com.example.clientbackend.requests.AuthenticationRequest;
 import com.example.clientbackend.requests.AuthenticationResponse;
 import com.example.clientbackend.requests.RegistrationRequest;
@@ -13,22 +15,25 @@ import com.example.clientbackend.token.confirmation.ConfirmationTokenService;
 import com.example.clientbackend.token.jwt.JwtService;
 import com.example.clientbackend.token.jwt.JwtToken;
 import com.example.clientbackend.token.jwt.JwtTokenRepository;
+import com.google.gson.Gson;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Import;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
 import java.net.InetAddress;
 import java.time.LocalDateTime;
 
-import static com.example.clientbackend.Constants.SERVICE_PORT;
-import static com.example.clientbackend.Constants.TOKEN_CONFIRM_LINK_FORMAT;
+import static com.example.clientbackend.Constants.*;
 
 @Service
 @AllArgsConstructor
 @EnableScheduling
+@Import(KafkaProducerConfig.class)
 public class AuthenticationService {
 
     private final AppUserService appUserService;
@@ -41,9 +46,10 @@ public class AuthenticationService {
 
     private final JwtTokenRepository jwtTokenRepositoryRepository;
 
-    private final EmailSender emailSender;
+    private final KafkaProducerConfig kafkaProducerConfig;
 
-    private final AuthenticationManager authenticationManager;
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
 
 
     private void saveUserJwtToken(AppUser user, String jwtToken) {
@@ -94,6 +100,7 @@ public class AuthenticationService {
             revokeAllUserTokens(user);
             saveUserJwtToken(user, jwtToken);
 
+            sendKafkaMessage(new KafkaCommand(CommandType.USER_AUTHORISED, user.getEmail()));
             return new AuthenticationResponse(null, jwtToken);
         } else return null;
     }
@@ -116,6 +123,8 @@ public class AuthenticationService {
 
         confirmationTokenService.setConfirmedAt(token);
         appUserService.enableAppUser(confirmationToken.getAppUser().getEmail());
+        sendKafkaMessage(new KafkaCommand(CommandType.USER_ENABLED, confirmationToken.getAppUser().getEmail()));
+
         return Mono.just("confirmed");
     }
 
@@ -191,5 +200,11 @@ public class AuthenticationService {
                 "  </tbody></table><div class=\"yj6qo\"></div><div class=\"adL\">\n" +
                 "\n" +
                 "</div></div>";
+    }
+
+    private void sendKafkaMessage(KafkaCommand command) {
+        Gson gson = new Gson();
+        String jsonMessage = gson.toJson(command);
+        kafkaProducerConfig.initTemplate().send(FROM_CLIENT_TO_MESSAGE_SERVICE_TOPIC, jsonMessage);
     }
 }
