@@ -42,6 +42,11 @@ services:
     volumes:
       - /var/lib/pgadmin
 
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+
   zookeeper:
     image: wurstmeister/zookeeper
     container_name: zookeeper
