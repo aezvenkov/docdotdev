@@ -24,13 +24,14 @@ public class ApplicationConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        AppUser defaultAdminUser = new AppUser(
-                "admin",
-                "admin",
-                "admin@admin.com",
-                bCryptPasswordEncoder.encode("secret"),
-                AppUserRole.ADMIN
-        );
+        AppUser defaultAdminUser = AppUser.builder()
+                .firstName("admin")
+                .lastName("admin")
+                .email("admin@admin.com")
+                .password(bCryptPasswordEncoder.encode("secret"))
+                .appUserRole(AppUserRole.ADMIN)
+                .build();
+
         defaultAdminUser.setEnabled(true);
         appUserService.signUser(defaultAdminUser);
 
@@ -38,22 +39,6 @@ public class ApplicationConfig {
         return username -> appUserService.getUserByEmail(username).orElseThrow(() ->
                 new UsernameNotFoundException("User not found"));
     }
-
-//    @Override
-//    @Bean
-//    protected UserDetailsService userDetailsService() {
-//        AppUser adminUser = new AppUser(
-//                "admin",
-//                "admin",
-//                "admin@admin.com",
-//                bCryptPasswordEncoder.encode("secret"),
-//                AppUserRole.ADMIN
-//        );
-//        adminUser.setEnabled(true);
-//        appUserRepository.save(adminUser);
-//
-//        return new InMemoryUserDetailsManager(adminUser);
-//    }
 
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {

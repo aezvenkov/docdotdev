@@ -17,10 +17,19 @@ x-pgadmin-dashboard-data:
 x-client-backend-data:
   &client-backend-data
   environment:
-    server.port: 8080
+    server.port: 8081
+    spring.kafka.bootstrap-servers: localhost:9092
     spring.datasource.url: jdbc:postgresql://localhost:5432/main
     spring.datasource.username: admin@admin.com
     spring.datasource.password: secret
+
+x-message-backend-data:
+  &message-backend-data
+  environment:
+    server.port: 8080
+    spring.kafka.bootstrap-servers: localhost:9092
+    spring.data.redis.host: localhost
+    spring.data.redis.port: 6379
 
 services:
   postgres:
@@ -70,7 +79,16 @@ services:
       dockerfile: Dockerfile
     <<: *client-backend-data
     ports:
-      - "8081:8080"
+      - "8081:8081"
 
-#  doc-backend:
-#
+  message-backend:
+    container_name: docdotdev_message_backend
+    image: docdotdev_message_backend
+    build:
+      context: ./backend/message-backend
+      dockerfile: Dockerfile
+    <<: *message-backend-data
+    ports:
+      - "8080:8080"
+
+

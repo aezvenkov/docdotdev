@@ -6,7 +6,9 @@ public enum AppUserPermissions {
     APP_USER_READ("app_user:read"),
     APP_USER_WRITE("app_user:write"),
     CONFIRMATION_TOKEN_READ("confirmation_token:read"),
-    CONFIRMATION_TOKEN_WRITE("confirmation_token:write");
+    CONFIRMATION_TOKEN_WRITE("confirmation_token:write"),
+    ORGANIZATION_READ("organization:read"),
+    ORGANIZATION_WRITE("organization:write");
 
     private final String permission;
 

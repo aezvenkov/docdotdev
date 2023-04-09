@@ -1,7 +1,6 @@
 package com.example.clientbackend.token.jwt;
 
 import com.example.clientbackend.appuser.model.AppUser;
-import com.example.clientbackend.token.TokenType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,9 +22,6 @@ public class JwtToken {
 
     @Column(unique = true)
     public String token;
-
-    @Enumerated(EnumType.STRING)
-    public TokenType tokenType = TokenType.BEARER;
 
     public boolean revoked;
 

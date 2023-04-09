@@ -5,17 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29aa2605-89a3-4ad8-b6a0-e47999b3cc68" name="Changes" comment="Docker deployment for client-backend and db setting up">
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/config/KafkaProducerConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/kafka/CommandType.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/kafka/KafkaCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/resources/banner.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/controllers/OrganizationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/client-backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/AppUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/AppUserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/AuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/config/KafkaTopicConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/config/KafkaTopicConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/model/AppUserPermissions.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/model/AppUserPermissions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/model/AppUserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/model/AppUserRole.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/config/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,27 +34,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/artem/GitHub/security-service&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\artem\\GitHub\\docdotdev\\frontend\\frontend-client\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/artem/DevProjects/docdotdev",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
+    "ts.external.directory.path": "C:\\Users\\artem\\GitHub\\docdotdev\\frontend\\frontend-client\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\artem\GitHub\docdotdev\frontend" />
@@ -211,6 +206,8 @@
       <workItem from="1680456797533" duration="611000" />
       <workItem from="1680474644479" duration="7000" />
       <workItem from="1680801837928" duration="2670000" />
+      <workItem from="1680994258518" duration="58000" />
+      <workItem from="1681046389890" duration="460000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678664181065</created>

@@ -1,7 +1,6 @@
 package com.example.clientbackend.token.confirmation;
 
 import com.example.clientbackend.appuser.model.AppUser;
-import com.example.clientbackend.token.TokenType;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,9 +33,6 @@ public class ConfirmationToken {
 
     @Column(nullable = false)
     private String token;
-
-    @Enumerated(EnumType.STRING)
-    private TokenType tokenType = TokenType.CONFIRMATION;
 
     @Column(nullable = false)
     private LocalDateTime createdAt;

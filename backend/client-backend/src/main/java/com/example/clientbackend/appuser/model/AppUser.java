@@ -1,10 +1,10 @@
 package com.example.clientbackend.appuser.model;
 
+import com.example.clientbackend.organization.Organization;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +14,9 @@ import java.util.Collections;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode
 @Entity
 public class AppUser implements UserDetails {
@@ -42,17 +44,18 @@ public class AppUser implements UserDetails {
     @Enumerated(EnumType.STRING)
     private AppUserRole appUserRole;
 
+    @Enumerated(EnumType.STRING)
+    private AccountType accountType;
+
+    @ManyToOne
+    @JoinColumn
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Organization organizationId;
+
     private boolean locked = false;
 
     private boolean enabled = false;
 
-    public AppUser(String firstName, String lastName, String email, String password, AppUserRole appUserRole) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-        this.appUserRole = appUserRole;
-    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

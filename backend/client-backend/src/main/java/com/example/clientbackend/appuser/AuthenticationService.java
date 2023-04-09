@@ -9,7 +9,6 @@ import com.example.clientbackend.kafka.KafkaCommand;
 import com.example.clientbackend.requests.AuthenticationRequest;
 import com.example.clientbackend.requests.AuthenticationResponse;
 import com.example.clientbackend.requests.RegistrationRequest;
-import com.example.clientbackend.token.TokenType;
 import com.example.clientbackend.token.confirmation.ConfirmationToken;
 import com.example.clientbackend.token.confirmation.ConfirmationTokenService;
 import com.example.clientbackend.token.jwt.JwtService;
@@ -56,7 +55,6 @@ public class AuthenticationService {
         var token = JwtToken.builder()
                 .user(user)
                 .token(jwtToken)
-                .tokenType(TokenType.BEARER)
                 .expired(false)
                 .revoked(false)
                 .build();
@@ -80,7 +78,13 @@ public class AuthenticationService {
         if (!isValidEmail) {
             throw new IllegalStateException("Email not valid!");
         }
-        var user = new AppUser(request.firstName(), request.lastName(), request.email(), request.password(), AppUserRole.USER);
+        var user = AppUser.builder()
+                .firstName(request.firstName())
+                .lastName(request.lastName())
+                .email(request.email())
+                .password(request.password())
+                .appUserRole(AppUserRole.USER)
+                .build();
 
         String confirmationToken = appUserService.signUser(user);
         //emailSender.send(request.email(), buildEmail(request.firstName(), buildConfirmLink(confirmationToken)));
