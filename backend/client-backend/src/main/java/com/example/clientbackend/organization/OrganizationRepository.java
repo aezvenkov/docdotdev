@@ -1,16 +1,22 @@
 package com.example.clientbackend.organization;
 
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-import reactor.core.publisher.Mono;
+
+import java.util.Optional;
 
 @Repository
-public interface OrganizationRepository extends ReactiveCrudRepository<Organization, Long> {
+public interface OrganizationRepository extends JpaRepository<Organization, Long> {
 
-    Mono<Organization> findByTitle(String title);
+    Optional<Organization> findByTitle(String title);
 
-    Mono<Boolean> existsByTitle(String title);
+    Boolean existsByTitle(String title);
 
-    Mono<Void> updateOrganizationById(long id, Organization organization);
-
+    @Modifying
+    @Transactional
+    @Query("UPDATE Organization o SET o.title =:newTitle WHERE o.id =:id")
+    void updateTitleById(Long id, String newTitle);
 }

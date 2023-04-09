@@ -5,7 +5,6 @@ import com.example.clientbackend.organization.OrganizationService;
 import com.example.clientbackend.requests.OrganizationRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Mono;
 
 @RestController
 @RequestMapping(path = "/api/v1/organization_management")
@@ -21,7 +20,7 @@ public class OrganizationController {
     }
 
     @GetMapping(path = "organization_by_id")
-    public Mono<Organization> getOrganizationById(@RequestParam("id") long id) {
+    public Organization getOrganizationById(@RequestParam("id") long id) {
         return organizationService.getOrganizationById(id);
     }
 

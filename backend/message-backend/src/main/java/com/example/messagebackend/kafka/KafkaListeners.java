@@ -1,5 +1,6 @@
 package com.example.messagebackend.kafka;
 
+import com.example.messagebackend.logs.RedisLogService;
 import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -11,6 +12,8 @@ import static com.example.messagebackend.Constants.FROM_CLIENT_TO_MESSAGE_SERVIC
 @AllArgsConstructor
 public class KafkaListeners {
 
+    private final RedisLogService logService;
+
     @KafkaListener(
             topics = FROM_CLIENT_TO_MESSAGE_SERVICE_TOPIC,
             groupId = "groupId"
@@ -20,6 +23,7 @@ public class KafkaListeners {
         Gson gson = new Gson();
 
         KafkaCommandDTO command = gson.fromJson(data, KafkaCommandDTO.class);
+        logService.saveLog(command);
         consumeClientMessage(command);
     }
 

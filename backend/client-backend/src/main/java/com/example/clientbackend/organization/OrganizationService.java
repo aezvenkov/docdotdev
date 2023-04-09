@@ -8,7 +8,6 @@ import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Mono;
 
 import static com.example.clientbackend.Constants.FROM_CLIENT_TO_MESSAGE_SERVICE_TOPIC;
 
@@ -22,63 +21,47 @@ public class OrganizationService {
     private final KafkaProducerConfig kafkaProducerConfig;
 
 
-    public Mono<Organization> getOrganizationById(long id) {
-        Mono<Boolean> isExists = organizationRepository.existsById(id);
+    public Organization getOrganizationById(long id) {
+        boolean isExists = organizationRepository.existsById(id);
 
-        return isExists.flatMap(exists -> {
-            if (exists) {
-                return organizationRepository.findById(id);
-            } else {
-                return Mono.empty();
-            }
-        });
+        if (isExists) {
+            return organizationRepository.findById(id).get();
+        } else {
+            return null;
+        }
     }
 
     public void createOrganization(OrganizationRequest request) {
-        Mono<Boolean> isExists = organizationRepository.existsByTitle(request.title());
+        boolean isExists = organizationRepository.existsByTitle(request.title());
 
-        isExists.subscribe(result -> {
-            if (result) {
-                throw new IllegalStateException("Organization already exists!");
-            } else {
-                Mono<Organization> organizationMono =
-                        organizationRepository.save(Organization.builder().title(request.title()).build());
-                organizationMono.subscribe(organization -> {
-                    sendKafkaMessage(new KafkaCommand(CommandType.ORGANIZATION_CREATED, organization.getTitle()));
-                });
-            }
-        });
+        if (isExists) {
+            throw new IllegalStateException("Organization already exists!");
+        } else {
+            Organization organization = organizationRepository.save(Organization.builder().title(request.title()).build());
+            sendKafkaMessage(new KafkaCommand(CommandType.ORGANIZATION_CREATED, organization.getTitle()));
+        }
     }
 
     public void updateOrganization(long id, OrganizationRequest request) {
-        Mono<Boolean> isExists = organizationRepository.existsById(id);
+        boolean isExists = organizationRepository.existsById(id);
 
-        isExists.subscribe(result -> {
-            if (result) {
-                organizationRepository.updateOrganizationById(
-                        id, Organization.builder()
-                                .title(request.title())
-                                .build()).then(
-                        Mono.just(new KafkaCommand(CommandType.ORGANIZATION_UPDATED, "organizationId: " + id))
-                ).subscribe(this::sendKafkaMessage);
-            } else {
-                throw new IllegalStateException("Organization is not exists!");
-            }
-        });
+        if (isExists) {
+            organizationRepository.updateTitleById(id, request.title());
+            sendKafkaMessage(new KafkaCommand(CommandType.ORGANIZATION_UPDATED, "organizationId: " + id));
+        } else {
+            throw new IllegalStateException("Organization is not exists!");
+        }
     }
 
     public void deleteOrganization(long id) {
-        Mono<Boolean> isExists = organizationRepository.existsById(id);
+        boolean isExists = organizationRepository.existsById(id);
 
-        isExists.subscribe(result -> {
-            if (result) {
-                organizationRepository.deleteById(id).then(
-                        Mono.just(new KafkaCommand(CommandType.ORGANIZATION_DELETED, "organizationId: " + id))
-                ).subscribe(this::sendKafkaMessage);
-            } else {
-                throw new IllegalStateException("Organization is not exists!");
-            }
-        });
+        if (isExists) {
+            organizationRepository.deleteById(id);
+            sendKafkaMessage(new KafkaCommand(CommandType.ORGANIZATION_DELETED, "organizationId: " + id));
+        } else {
+            throw new IllegalStateException("Organization is not exists!");
+        }
     }
 
     private void sendKafkaMessage(KafkaCommand command) {

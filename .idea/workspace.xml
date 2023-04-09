@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29aa2605-89a3-4ad8-b6a0-e47999b3cc68" name="Changes" comment="Docker deployment for client-backend and db setting up">
-      <change afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/controllers/OrganizationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/model/AppUserPermissions.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/model/AppUserPermissions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/model/AppUserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/appuser/model/AppUserRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/config/WebSecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/controllers/OrganizationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/controllers/OrganizationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/organization/OrganizationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/organization/OrganizationRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/organization/OrganizationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/organization/OrganizationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/message-backend/src/main/java/com/example/messagebackend/logs/RedisLogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/message-backend/src/main/java/com/example/messagebackend/logs/RedisLogService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,27 +33,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/artem/DevProjects/docdotdev",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
-    "ts.external.directory.path": "C:\\Users\\artem\\GitHub\\docdotdev\\frontend\\frontend-client\\node_modules\\typescript\\lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/artem/DevProjects/docdotdev&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\artem\\GitHub\\docdotdev\\frontend\\frontend-client\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\artem\GitHub\docdotdev\frontend" />
@@ -63,7 +62,7 @@
       <recent name="C:\Users\artem\GitHub\docdotdev\backend\client-backend" />
     </key>
   </component>
-  <component name="RunManager" selected="Docker.docker-compose.yml.kafka: Compose Deployment">
+  <component name="RunManager" selected="Docker.docker-compose.yml.redis: Compose Deployment">
     <configuration default="true" type="AZURE_FUNCTION_SUPPORT" factoryName="Run Functions">
       <option name="appName" />
       <option name="appServicePlanName" />
@@ -111,19 +110,6 @@
       </deployment>
       <method v="2" />
     </configuration>
-    <configuration name="docker-compose.yml.client-backend: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
-      <deployment type="docker-compose.yml">
-        <settings>
-          <option name="services">
-            <list>
-              <option value="client-backend" />
-            </list>
-          </option>
-          <option name="sourceFilePath" value="docker-compose.yml" />
-        </settings>
-      </deployment>
-      <method v="2" />
-    </configuration>
     <configuration name="docker-compose.yml.kafka: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
       <deployment type="docker-compose.yml">
         <settings>
@@ -143,6 +129,19 @@
           <option name="services">
             <list>
               <option value="postgres" />
+            </list>
+          </option>
+          <option name="sourceFilePath" value="docker-compose.yml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="docker-compose.yml.redis: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="services">
+            <list>
+              <option value="redis" />
             </list>
           </option>
           <option name="sourceFilePath" value="docker-compose.yml" />
@@ -175,11 +174,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Docker.docker-compose.yml.redis: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.kafka: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.zookeeper: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml.postgres: Compose Deployment" />
         <item itemvalue="Docker.docker-compose.yml: Compose Deployment" />
-        <item itemvalue="Docker.docker-compose.yml.client-backend: Compose Deployment" />
       </list>
     </recent_temporary>
   </component>
@@ -207,7 +206,8 @@
       <workItem from="1680474644479" duration="7000" />
       <workItem from="1680801837928" duration="2670000" />
       <workItem from="1680994258518" duration="58000" />
-      <workItem from="1681046389890" duration="460000" />
+      <workItem from="1681046389890" duration="1915000" />
+      <workItem from="1681068606549" duration="40000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678664181065</created>
