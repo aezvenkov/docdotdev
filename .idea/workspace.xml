@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="29aa2605-89a3-4ad8-b6a0-e47999b3cc68" name="Changes" comment="Docker deployment for client-backend and db setting up">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/controllers/OrganizationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/controllers/OrganizationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/organization/OrganizationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/organization/OrganizationRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/organization/OrganizationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/client-backend/src/main/java/com/example/clientbackend/organization/OrganizationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/message-backend/src/main/java/com/example/messagebackend/logs/RedisLogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/message-backend/src/main/java/com/example/messagebackend/logs/RedisLogService.java" afterDir="false" />
-    </list>
+    <list default="true" id="29aa2605-89a3-4ad8-b6a0-e47999b3cc68" name="Changes" comment="Services renaming. Doc-service init" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -208,6 +202,7 @@
       <workItem from="1680994258518" duration="58000" />
       <workItem from="1681046389890" duration="1915000" />
       <workItem from="1681068606549" duration="40000" />
+      <workItem from="1681486133157" duration="927000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678664181065</created>
@@ -230,7 +225,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680043021199</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Services renaming. Doc-service init">
+      <created>1681486651389</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1681486651389</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -254,6 +256,7 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Plugins config" />
     <MESSAGE value="Docker deployment for client-backend and db setting up" />
-    <option name="LAST_COMMIT_MESSAGE" value="Docker deployment for client-backend and db setting up" />
+    <MESSAGE value="Services renaming. Doc-service init" />
+    <option name="LAST_COMMIT_MESSAGE" value="Services renaming. Doc-service init" />
   </component>
 </project>
