@@ -71,21 +71,21 @@ services:
       KAFKA_ADVERTISED_HOST_NAME: localhost
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
 
-  client-backend:
-    container_name: docdotdev_client_backend
+  client-service:
+    container_name: docdotdev_client_service
     image: docdotdev_client_backend
     build:
-      context: ./backend/client-backend
+      context: backend/client-service
       dockerfile: Dockerfile
     <<: *client-backend-data
     ports:
       - "8081:8081"
 
-  message-backend:
-    container_name: docdotdev_message_backend
+  message-service:
+    container_name: docdotdev_message_service
     image: docdotdev_message_backend
     build:
-      context: ./backend/message-backend
+      context: backend/message-service
       dockerfile: Dockerfile
     <<: *message-backend-data
     ports:
