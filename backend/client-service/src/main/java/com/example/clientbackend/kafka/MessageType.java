@@ -1,0 +1,14 @@
+package com.example.clientbackend.kafka;
+
+public enum MessageType {
+    USER_REGISTERED,
+    USER_AUTHORISED,
+    USER_DELETED,
+    USER_CREATED,
+    USER_UPDATED,
+    USER_ENABLED,
+    ORGANIZATION_CREATED,
+    ORGANIZATION_DELETED,
+    ORGANIZATION_UPDATED,
+    SEND_PUSH_NOTIFICATION
+}

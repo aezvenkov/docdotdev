@@ -5,7 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f497a414-7708-4942-b7f1-8eabb15ed035" name="Changes" comment="Client-backend: repo bugfix">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client-service/src/main/java/com/example/clientbackend/token/device/DeviceToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client-service/src/main/java/com/example/clientbackend/token/device/DeviceTokenRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../client-service/src/main/java/com/example/clientbackend/token/device/DeviceTokenService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../message-service/src/main/java/com/example/messagebackend/gcm/GcmService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../message-service/src/main/java/com/example/messagebackend/kafka/MessageType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../client-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client-service/src/main/java/com/example/clientbackend/appuser/AppUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client-service/src/main/java/com/example/clientbackend/appuser/AppUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client-service/src/main/java/com/example/clientbackend/appuser/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client-service/src/main/java/com/example/clientbackend/appuser/AuthenticationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client-service/src/main/java/com/example/clientbackend/kafka/CommandType.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client-service/src/main/java/com/example/clientbackend/kafka/MessageType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client-service/src/main/java/com/example/clientbackend/kafka/KafkaCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client-service/src/main/java/com/example/clientbackend/kafka/KafkaMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client-service/src/main/java/com/example/clientbackend/organization/OrganizationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client-service/src/main/java/com/example/clientbackend/organization/OrganizationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client-service/src/main/java/com/example/clientbackend/requests/AuthenticationRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../client-service/src/main/java/com/example/clientbackend/requests/AuthenticationRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../message-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../message-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../message-service/src/main/java/com/example/messagebackend/kafka/CommandType.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../message-service/src/main/java/com/example/messagebackend/kafka/KafkaCommandDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/../message-service/src/main/java/com/example/messagebackend/kafka/KafkaMessageDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../message-service/src/main/java/com/example/messagebackend/kafka/KafkaListeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/../message-service/src/main/java/com/example/messagebackend/kafka/KafkaListeners.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../message-service/src/main/java/com/example/messagebackend/logs/RedisLogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../message-service/src/main/java/com/example/messagebackend/logs/RedisLogService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,9 +34,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
-        <option value="Interface" />
         <option value="Record" />
+        <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -36,7 +55,6 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="Use Maven wrapper" />
         <option name="useMavenConfig" value="true" />
       </MavenGeneralSettings>
     </option>
@@ -57,14 +75,14 @@
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/artem/DevProjects/docdotdev/backend/message-backend",
+    "last_opened_file_path": "C:/Users/artem/DevProjects/docdotdev",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.editor",
-    "spring.configuration.checksum": "cc7c7dcdcd6e0cef36e012fe9057435a",
+    "spring.configuration.checksum": "7012bcfeb18922f116e31f0b0627a2ea",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -104,15 +122,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
+    <configuration name="ClientBackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="client-service" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="client-service" />
-      <option name="filePath" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.clientbackend.ClientBackendApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -134,6 +146,9 @@
       <workItem from="1681155407547" duration="2749000" />
       <workItem from="1681160625817" duration="142000" />
       <workItem from="1681486140511" duration="768000" />
+      <workItem from="1681832394266" duration="772000" />
+      <workItem from="1682074876747" duration="7000" />
+      <workItem from="1682253853076" duration="4031000" />
     </task>
     <task id="LOCAL-00001" summary="Client-backend: adding organizations">
       <created>1681065717503</created>

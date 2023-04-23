@@ -1,8 +1,8 @@
 package com.example.clientbackend.organization;
 
 import com.example.clientbackend.config.KafkaProducerConfig;
-import com.example.clientbackend.kafka.CommandType;
-import com.example.clientbackend.kafka.KafkaCommand;
+import com.example.clientbackend.kafka.MessageType;
+import com.example.clientbackend.kafka.KafkaMessage;
 import com.example.clientbackend.requests.OrganizationRequest;
 import com.google.gson.Gson;
 import lombok.AllArgsConstructor;
@@ -38,7 +38,7 @@ public class OrganizationService {
             throw new IllegalStateException("Organization already exists!");
         } else {
             Organization organization = organizationRepository.save(Organization.builder().title(request.title()).build());
-            sendKafkaMessage(new KafkaCommand(CommandType.ORGANIZATION_CREATED, organization.getTitle()));
+            sendKafkaMessage(new KafkaMessage(MessageType.ORGANIZATION_CREATED, organization.getTitle()));
         }
     }
 
@@ -47,7 +47,7 @@ public class OrganizationService {
 
         if (isExists) {
             organizationRepository.updateTitleById(id, request.title());
-            sendKafkaMessage(new KafkaCommand(CommandType.ORGANIZATION_UPDATED, "organizationId: " + id));
+            sendKafkaMessage(new KafkaMessage(MessageType.ORGANIZATION_UPDATED, "organizationId: " + id));
         } else {
             throw new IllegalStateException("Organization is not exists!");
         }
@@ -58,13 +58,13 @@ public class OrganizationService {
 
         if (isExists) {
             organizationRepository.deleteById(id);
-            sendKafkaMessage(new KafkaCommand(CommandType.ORGANIZATION_DELETED, "organizationId: " + id));
+            sendKafkaMessage(new KafkaMessage(MessageType.ORGANIZATION_DELETED, "organizationId: " + id));
         } else {
             throw new IllegalStateException("Organization is not exists!");
         }
     }
 
-    private void sendKafkaMessage(KafkaCommand command) {
+    private void sendKafkaMessage(KafkaMessage command) {
         Gson gson = new Gson();
         String jsonMessage = gson.toJson(command);
         kafkaProducerConfig.initTemplate().send(FROM_CLIENT_TO_MESSAGE_SERVICE_TOPIC, jsonMessage);

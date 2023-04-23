@@ -1,6 +1,6 @@
 package com.example.messagebackend.logs;
 
-import com.example.messagebackend.kafka.KafkaCommandDTO;
+import com.example.messagebackend.kafka.KafkaMessageDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,7 @@ public class RedisLogService {
         return redisLogs;
     }
 
-    public void saveLog(KafkaCommandDTO command) {
+    public void saveLog(KafkaMessageDTO command) {
         String id = UUID.randomUUID().toString();
         RedisLog redisLog = new RedisLog(id, command.getDate(), command.getType().toString(), null, command.getPayload());
 

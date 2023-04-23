@@ -4,19 +4,22 @@ import com.example.clientbackend.appuser.model.AppUser;
 import com.example.clientbackend.appuser.model.AppUserRole;
 import com.example.clientbackend.config.KafkaProducerConfig;
 import com.example.clientbackend.email.EmailValidator;
-import com.example.clientbackend.kafka.CommandType;
-import com.example.clientbackend.kafka.KafkaCommand;
+import com.example.clientbackend.kafka.KafkaMessage;
+import com.example.clientbackend.kafka.MessageType;
 import com.example.clientbackend.requests.AuthenticationRequest;
 import com.example.clientbackend.requests.AuthenticationResponse;
 import com.example.clientbackend.requests.RegistrationRequest;
 import com.example.clientbackend.token.confirmation.ConfirmationToken;
 import com.example.clientbackend.token.confirmation.ConfirmationTokenService;
+import com.example.clientbackend.token.device.DeviceToken;
+import com.example.clientbackend.token.device.DeviceTokenService;
 import com.example.clientbackend.token.jwt.JwtService;
 import com.example.clientbackend.token.jwt.JwtToken;
 import com.example.clientbackend.token.jwt.JwtTokenRepository;
 import com.google.gson.Gson;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Import;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -26,6 +29,7 @@ import reactor.core.publisher.Mono;
 
 import java.net.InetAddress;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import static com.example.clientbackend.Constants.*;
 
@@ -40,6 +44,8 @@ public class AuthenticationService {
     private final ConfirmationTokenService confirmationTokenService;
 
     private final JwtService jwtService;
+
+    private final DeviceTokenService deviceTokenService;
 
     private EmailValidator emailValidator;
 
@@ -96,7 +102,6 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-
         var user = appUserService.getUserByEmail(request.email()).orElseThrow();
 
         if (user.isEnabled()) {
@@ -104,9 +109,33 @@ public class AuthenticationService {
             revokeAllUserTokens(user);
             saveUserJwtToken(user, jwtToken);
 
-            sendKafkaMessage(new KafkaCommand(CommandType.USER_AUTHORISED, user.getEmail()));
+            if (request.deviceToken() != null) {
+                deviceTokenService.addDeviceToken(request.deviceToken(), user);
+            }
+
+            sendAuthPushNotification(user);
+            sendKafkaMessage(new KafkaMessage(MessageType.USER_AUTHORISED, user.getEmail()));
             return new AuthenticationResponse(null, jwtToken);
         } else return null;
+    }
+
+    private void sendAuthPushNotification(AppUser appUser) {
+        var deviceTokens = deviceTokenService.getDeviceTokens(appUser);
+        var tokenValues = new ArrayList<String>();
+
+        if (!deviceTokens.isEmpty()) {
+            JSONObject payload = new JSONObject();
+            payload.put("title", "");
+            payload.put("body", "");
+
+            for (DeviceToken token : deviceTokens) {
+                tokenValues.add(token.getToken());
+            }
+            payload.put("device_tokens", tokenValues);
+
+            sendKafkaMessage(new KafkaMessage(
+                    MessageType.SEND_PUSH_NOTIFICATION, payload.toString()));
+        }
     }
 
     @Transactional
@@ -127,7 +156,7 @@ public class AuthenticationService {
 
         confirmationTokenService.setConfirmedAt(token);
         appUserService.enableAppUser(confirmationToken.getAppUser().getEmail());
-        sendKafkaMessage(new KafkaCommand(CommandType.USER_ENABLED, confirmationToken.getAppUser().getEmail()));
+        sendKafkaMessage(new KafkaMessage(MessageType.USER_ENABLED, confirmationToken.getAppUser().getEmail()));
 
         return Mono.just("confirmed");
     }
@@ -206,7 +235,7 @@ public class AuthenticationService {
                 "</div></div>";
     }
 
-    private void sendKafkaMessage(KafkaCommand command) {
+    private void sendKafkaMessage(KafkaMessage command) {
         Gson gson = new Gson();
         String jsonMessage = gson.toJson(command);
         kafkaProducerConfig.initTemplate().send(FROM_CLIENT_TO_MESSAGE_SERVICE_TOPIC, jsonMessage);

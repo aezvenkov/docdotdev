@@ -4,8 +4,8 @@ import com.example.clientbackend.appuser.model.AppUser;
 import com.example.clientbackend.appuser.model.AppUserRole;
 import com.example.clientbackend.config.KafkaProducerConfig;
 import com.example.clientbackend.email.EmailValidator;
-import com.example.clientbackend.kafka.CommandType;
-import com.example.clientbackend.kafka.KafkaCommand;
+import com.example.clientbackend.kafka.MessageType;
+import com.example.clientbackend.kafka.KafkaMessage;
 import com.example.clientbackend.token.confirmation.ConfirmationToken;
 import com.example.clientbackend.token.confirmation.ConfirmationTokenService;
 import com.google.gson.Gson;
@@ -59,7 +59,7 @@ public class AppUserService implements UserDetailsService {
             List<ConfirmationToken> expiredTokens = confirmationTokenService.getExpiredTokens(now);
             for (ConfirmationToken token : expiredTokens) {
                 appUserRepository.deleteById(token.getAppUser().getUid());
-                sendKafkaMessage(new KafkaCommand(CommandType.USER_DELETED, token.getAppUser().getEmail()));
+                sendKafkaMessage(new KafkaMessage(MessageType.USER_DELETED, token.getAppUser().getEmail()));
             }
             confirmationTokenService.deleteExpiredTokens(now);
         } catch (Exception exception) {
@@ -88,7 +88,7 @@ public class AppUserService implements UserDetailsService {
         confirmationTokenService.saveConfirmationToken(
                 confirmationToken);
 
-        sendKafkaMessage(new KafkaCommand(CommandType.USER_REGISTERED, appUser.getEmail()));
+        sendKafkaMessage(new KafkaMessage(MessageType.USER_REGISTERED, appUser.getEmail()));
         return token;
     }
 
@@ -119,7 +119,7 @@ public class AppUserService implements UserDetailsService {
         Optional<AppUser> appUser = appUserRepository.findById(id);
         if (appUser.isPresent() && appUser.get().getAppUserRole() != AppUserRole.ADMIN) {
             appUserRepository.deleteById(id);
-            sendKafkaMessage(new KafkaCommand(CommandType.USER_DELETED, appUser.get().getEmail()));
+            sendKafkaMessage(new KafkaMessage(MessageType.USER_DELETED, appUser.get().getEmail()));
             return String.format("User with id:%s successfully deleted", id);
         } else return String.format("User with id:%s does not exist or is an administrator!", id);
     }
@@ -128,7 +128,7 @@ public class AppUserService implements UserDetailsService {
         Optional<AppUser> appUser = appUserRepository.findByEmail(email);
         if (appUser.isPresent() && appUser.get().getAppUserRole() != AppUserRole.ADMIN) {
             appUserRepository.deleteById(appUser.get().getUid());
-            sendKafkaMessage(new KafkaCommand(CommandType.USER_DELETED, email));
+            sendKafkaMessage(new KafkaMessage(MessageType.USER_DELETED, email));
             return String.format("User with email:%s successfully deleted", email);
         } else return String.format("User with email:%s does not exist or is an administrator!", email);
     }
@@ -138,7 +138,7 @@ public class AppUserService implements UserDetailsService {
                 .test(email);
         if (isValidEmail && appUserRepository.findById(id).isPresent()) {
             appUserRepository.updateEmailById(id, email);
-            sendKafkaMessage(new KafkaCommand(CommandType.USER_UPDATED, email));
+            sendKafkaMessage(new KafkaMessage(MessageType.USER_UPDATED, email));
             return String.format("User email with id:%s successfully updated", id);
         } else throw new IllegalStateException(
                 String.format("User with id:%s does not exist or Email is not valid!", id));
@@ -148,7 +148,7 @@ public class AppUserService implements UserDetailsService {
         Optional<AppUser> appUser = appUserRepository.findByEmail(email);
         if (appUser.isPresent()) {
             appUserRepository.updateNameByEmail(email, firstName, lastName);
-            sendKafkaMessage(new KafkaCommand(CommandType.USER_UPDATED, email));
+            sendKafkaMessage(new KafkaMessage(MessageType.USER_UPDATED, email));
             return String.format("Username with email:%s successfully updated", email);
         } else throw new IllegalStateException(
                 String.format("User with email:%s does not exist or Data is not valid!", email));
@@ -160,7 +160,7 @@ public class AppUserService implements UserDetailsService {
         Optional<AppUser> appUser = appUserRepository.findByEmail(email);
         if (appUser.isPresent()) {
             appUserRepository.updatePasswordByEmail(email, encodedPassword);
-            sendKafkaMessage(new KafkaCommand(CommandType.USER_UPDATED, email));
+            sendKafkaMessage(new KafkaMessage(MessageType.USER_UPDATED, email));
             return String.format("Password with email:%s successfully updated", email);
         } else throw new IllegalStateException(
                 String.format("User with email:%s does not exist or Data is not valid!", email));
@@ -168,10 +168,10 @@ public class AppUserService implements UserDetailsService {
 
     public void enableAppUser(String email) {
         appUserRepository.enableAppUser(email);
-        sendKafkaMessage(new KafkaCommand(CommandType.USER_ENABLED, email));
+        sendKafkaMessage(new KafkaMessage(MessageType.USER_ENABLED, email));
     }
 
-    private void sendKafkaMessage(KafkaCommand command) {
+    private void sendKafkaMessage(KafkaMessage command) {
         Gson gson = new Gson();
         String jsonMessage = gson.toJson(command);
         kafkaProducerConfig.initTemplate().send(FROM_CLIENT_TO_MESSAGE_SERVICE_TOPIC, jsonMessage);

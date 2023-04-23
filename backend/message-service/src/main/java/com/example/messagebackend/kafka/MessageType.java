@@ -1,6 +1,6 @@
-package com.example.clientbackend.kafka;
+package com.example.messagebackend.kafka;
 
-public enum CommandType {
+public enum MessageType {
     USER_REGISTERED,
     USER_AUTHORISED,
     USER_DELETED,
@@ -9,5 +9,6 @@ public enum CommandType {
     USER_ENABLED,
     ORGANIZATION_CREATED,
     ORGANIZATION_DELETED,
-    ORGANIZATION_UPDATED
+    ORGANIZATION_UPDATED,
+    SEND_PUSH_NOTIFICATION
 }
